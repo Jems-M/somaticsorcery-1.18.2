@@ -1,0 +1,15 @@
+{
+  "item.somaticsorcery.hexed_obsidian": "Hexed Obsidian",
+  "item.somaticsorcery.spell_scroll_lv1": "Spell Scroll (LV1)",
+
+  "item.somaticsorcery.wooden_wand": "Wooden Wand",
+  "item.somaticsorcery.stone_wand": "Stone Wand",
+  "item.somaticsorcery.iron_wand": "Iron Wand",
+  "item.somaticsorcery.golden_wand": "Golden Wand",
+  "item.somaticsorcery.diamond_wand": "Diamond Wand",
+  "item.somaticsorcery.obsidian_wand": "Obsidian Wand",
+
+  "block.somaticsorcery.wall_of_force": "Wall of Force",
+
+  "itemGroup.somaticsorcery.somatic_sorcery": "Somatic Sorcery"
+}

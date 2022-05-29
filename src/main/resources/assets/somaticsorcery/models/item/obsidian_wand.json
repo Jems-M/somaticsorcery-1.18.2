@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "somaticsorcery:item/obsidian_wand"
+  }
+}
