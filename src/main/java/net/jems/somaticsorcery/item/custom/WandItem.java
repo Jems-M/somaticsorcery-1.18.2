@@ -1,15 +1,10 @@
 package net.jems.somaticsorcery.item.custom;
 
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.WeatherCommand;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Hand;
@@ -83,13 +78,10 @@ public class WandItem extends Item {
                 }
             }
         }
-        return TypedActionResult.fail(user.getStackInHand(hand));
+        user.setCurrentHand(hand);
+        return TypedActionResult.consume(user.getStackInHand(hand));
     }
 
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
-    }
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -100,7 +92,7 @@ public class WandItem extends Item {
         }
         currentSymbol = "";
         correctSymbolDrawn = false;
-        //super.onStoppedUsing(stack, world, user, remainingUseTicks);
+        super.onStoppedUsing(stack, world, user, remainingUseTicks);
     }
 
     private void populateSpellList(){
