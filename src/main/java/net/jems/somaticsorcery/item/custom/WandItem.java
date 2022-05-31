@@ -2,7 +2,6 @@ package net.jems.somaticsorcery.item.custom;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -34,6 +33,15 @@ public class WandItem extends Item {
         populateSpellList();
     }
 
+    @Override
+    public int getMaxUseTime(ItemStack stack) {
+        return 72000;
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.BOW;
+    }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -78,8 +86,9 @@ public class WandItem extends Item {
                 }
             }
         }
+        ItemStack itemStack = user.getStackInHand(hand);
         user.setCurrentHand(hand);
-        return TypedActionResult.consume(user.getStackInHand(hand));
+        return TypedActionResult.consume(itemStack);
     }
 
 
