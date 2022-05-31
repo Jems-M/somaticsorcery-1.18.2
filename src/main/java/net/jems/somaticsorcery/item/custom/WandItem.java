@@ -46,6 +46,7 @@ public class WandItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient()) {
+            user.sendSystemMessage(new LiteralText("use() moment"), Util.NIL_UUID);
             if (!correctSymbolDrawn) {
                 if (yawChanged || pitchChanged) {
                     startYaw = user.getYaw();
@@ -94,6 +95,8 @@ public class WandItem extends Item {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+
+        user.sendSystemMessage(new LiteralText("onStoppedUsing() moment"), Util.NIL_UUID);
         if (currentSymbol.equals("UUURRDURRDD")) {
             ServerWorld serverWorld = Objects.requireNonNull(user.getServer()).getOverworld();
             serverWorld.setWeather(18000, 0, false, false);
@@ -106,6 +109,6 @@ public class WandItem extends Item {
 
     private void populateSpellList(){
         allSpells.put("UUURRDURRDD", "Control Weather (Clear)");
-        allSpells.put("DDDLLUDLLUU", "Control Weather (Rain)");
+        allSpells.put("UUULLDULLDD", "Control Weather (Rain)");
     }
 }
