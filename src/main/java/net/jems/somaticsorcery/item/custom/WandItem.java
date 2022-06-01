@@ -1,5 +1,6 @@
 package net.jems.somaticsorcery.item.custom;
 
+import net.jems.somaticsorcery.SomaticSorcery;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -118,54 +119,53 @@ public class WandItem extends Item {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-
-        //user.sendSystemMessage(new LiteralText("onStoppedUsing() moment"), Util.NIL_UUID);
-        currentlyCasting = false;
-        if (currentSymbol.equals(symbolControlWeatherClear)) {
-            try {
-                ServerWorld serverWorld = user.getServer().getOverworld();
-                serverWorld.setWeather(36000, 0, false, false);
-            } catch (NullPointerException e) {
-                user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
-            }
-        } else if (currentSymbol.equals(symbolControlWeatherRain)) {
-            try {
-                ServerWorld serverWorld = user.getServer().getOverworld();
-                serverWorld.setWeather(0, 36000, true, false);
-            } catch (NullPointerException e) {
-                user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
-            }
-        } else if (currentSymbol.equals(symbolControlWeatherThunder)) {
-            try {
-                ServerWorld serverWorld = user.getServer().getOverworld();
-                serverWorld.setWeather(0, 36000, true, true);
-            } catch (NullPointerException e) {
-                //user.sendSystemMessage(new LiteralText("hehe null pointer exception"), Util.NIL_UUID);
-                //literally don't do anything. yes, neal would be sad. but neal doesn't have to know :)
-            }
-        } else if (currentSymbol.equals(symbolConjureBarrage)) {
-            user.sendSystemMessage(new LiteralText("firing arrows"), Util.NIL_UUID);
-            final int spread = 3;
-
-            int numArrows = 4 + (int) Math.ceil(Math.random() * 4);
-            for(int i=0; i < numArrows; i++) {
-
-                ArrowItem arrowItem = (ArrowItem)(stack.getItem() instanceof ArrowItem ? stack.getItem() : Items.ARROW);
-                PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, stack, user);
-                persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
-                if (Math.ceil(Math.random() * 4) == 4) {
-                    persistentProjectileEntity.setCritical(true);
+        if (!world.isClient()) {
+            //user.sendSystemMessage(new LiteralText("onStoppedUsing() moment"), Util.NIL_UUID);
+            currentlyCasting = false;
+            if (currentSymbol.equals(symbolControlWeatherClear)) {
+                try {
+                    ServerWorld serverWorld = user.getServer().getOverworld();
+                    serverWorld.setWeather(36000, 0, false, false);
+                } catch (NullPointerException e) {
+                    user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
                 }
-                persistentProjectileEntity.setVelocity(user,
-                        user.getPitch() - spread + (float) ((Math.random() * 2 * spread)),
-                        user.getYaw() - (2 * spread) + (float) ((Math.random() * 4 * spread)),
-                        0, 4 * (float) (Math.random()), 1);
-                world.spawnEntity(persistentProjectileEntity);
+            } else if (currentSymbol.equals(symbolControlWeatherRain)) {
+                try {
+                    ServerWorld serverWorld = user.getServer().getOverworld();
+                    serverWorld.setWeather(0, 36000, true, false);
+                } catch (NullPointerException e) {
+                    user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
+                }
+            } else if (currentSymbol.equals(symbolControlWeatherThunder)) {
+                try {
+                    ServerWorld serverWorld = user.getServer().getOverworld();
+                    serverWorld.setWeather(0, 36000, true, true);
+                } catch (NullPointerException e) {
+                    //user.sendSystemMessage(new LiteralText("hehe null pointer exception"), Util.NIL_UUID);
+                    //literally don't do anything. yes, neal would be sad. but neal doesn't have to know :)
+                }
+            } else if (currentSymbol.equals(symbolConjureBarrage)) {
+                final int spread = 3;
+                int numArrows = 4 + (int) Math.ceil(Math.random() * 4);
+
+                for (int i = 0; i < numArrows; i++) {
+                    ArrowItem arrowItem = (ArrowItem) (stack.getItem() instanceof ArrowItem ? stack.getItem() : Items.ARROW);
+                    PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, stack, user);
+                    persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+                    if (Math.ceil(Math.random() * 4) == 4) {
+                        persistentProjectileEntity.setCritical(true);
+                    }
+                    persistentProjectileEntity.setVelocity(user,
+                            user.getPitch() - spread + (float) ((Math.random() * 2 * spread)),
+                            user.getYaw() - (2 * spread) + (float) ((Math.random() * 4 * spread)),
+                            0, 4 * (float) (Math.random()), 1);
+                    world.spawnEntity(persistentProjectileEntity);
+                }
             }
+            currentSymbol = "";
+            correctSymbolDrawn = false;
+            super.onStoppedUsing(stack, world, user, remainingUseTicks);
         }
-        currentSymbol = "";
-        correctSymbolDrawn = false;
-        super.onStoppedUsing(stack, world, user, remainingUseTicks);
     }
 
     private void populateSpellList(){
