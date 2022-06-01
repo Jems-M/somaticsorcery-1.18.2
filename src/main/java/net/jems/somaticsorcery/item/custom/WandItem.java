@@ -149,9 +149,13 @@ public class WandItem extends Item {
 
             int numArrows = 4 + (int) Math.ceil(Math.random() * 4);
             for(int i=0; i < numArrows; i++) {
+
                 ArrowItem arrowItem = (ArrowItem)(stack.getItem() instanceof ArrowItem ? stack.getItem() : Items.ARROW);
                 PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, stack, user);
                 persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
+                if (Math.ceil(Math.random() * 4) == 4) {
+                    persistentProjectileEntity.setCritical(true);
+                }
                 persistentProjectileEntity.setVelocity(user,
                         user.getPitch() - spread + (float) ((Math.random() * 2 * spread)),
                         user.getYaw() - (2 * spread) + (float) ((Math.random() * 4 * spread)),
