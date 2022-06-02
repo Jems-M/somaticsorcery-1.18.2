@@ -11,5 +11,7 @@
 
   "block.somaticsorcery.wall_of_force": "Wall of Force",
 
-  "itemGroup.somaticsorcery.somatic_sorcery": "Somatic Sorcery"
+  "itemGroup.somaticsorcery.somatic_sorcery": "Somatic Sorcery",
+
+  "effect.somaticsorcery.call_lightning": "Call Lightning"
 }

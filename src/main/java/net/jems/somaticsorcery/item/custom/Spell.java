@@ -3,24 +3,26 @@ package net.jems.somaticsorcery.item.custom;
 
 public class Spell {
     private final String name;
-    private final String[] symbols;
+    private final String symbol;
 
-    public Spell(String name, String[] symbols) {
+    private final int level;
+
+    public Spell(String name, String symbol, int level) {
         this.name = name;
-        this.symbols = symbols;
+        this.symbol = symbol;
+        this.level = level;
     }
 
     public String getName() {
         return name;
     }
 
-    public boolean checkSymbol(String symbol) {
-        for (String i : symbols) {
-            if (i.equals(symbol)) {
-                return true;
-            }
-        }
-        return false;
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
 }

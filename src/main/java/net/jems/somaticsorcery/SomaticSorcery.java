@@ -2,6 +2,7 @@ package net.jems.somaticsorcery;
 
 import net.fabricmc.api.ModInitializer;
 import net.jems.somaticsorcery.block.ModBlocks;
+import net.jems.somaticsorcery.effect.ModEffects;
 import net.jems.somaticsorcery.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,5 +22,7 @@ public class SomaticSorcery implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
+		ModEffects.registerEffects();
 	}
 }

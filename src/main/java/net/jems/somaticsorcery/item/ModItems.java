@@ -2,7 +2,7 @@ package net.jems.somaticsorcery.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.jems.somaticsorcery.SomaticSorcery;
-import net.jems.somaticsorcery.item.custom.WandItem;
+import net.jems.somaticsorcery.item.custom.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -17,22 +17,22 @@ public class ModItems {
             new Item(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY)));
 
     public static final Item WOODEN_WAND = registerItem("wooden_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new WoodenWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item STONE_WAND = registerItem("stone_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new StoneWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item IRON_WAND = registerItem("iron_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new IronWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item GOLDEN_WAND = registerItem("golden_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new GoldenWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item DIAMOND_WAND = registerItem("diamond_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new DiamondWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item OBSIDIAN_WAND = registerItem("obsidian_wand",
-            new WandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
+            new ObsidianWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
 
     private static Item registerItem(String name, Item item) {
