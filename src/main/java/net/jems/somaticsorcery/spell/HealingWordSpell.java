@@ -22,7 +22,7 @@ public class HealingWordSpell extends Spell {
             user.heal(6.0f * intensityModifier);
         } else {
             try {
-                LivingEntity target = getEntityUnderCrosshair(user, world, 30);
+                LivingEntity target = getEntityUnderCrosshair(user, world, (int) (30 * rangeModifier));
                 target.heal(6.0f * intensityModifier);
             } catch (NullPointerException e) {
                 user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);

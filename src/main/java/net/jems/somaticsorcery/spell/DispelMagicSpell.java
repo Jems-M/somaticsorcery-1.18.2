@@ -8,26 +8,26 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
 
-public class RegenerateSpell extends Spell {
+public class DispelMagicSpell extends Spell {
 
-    public RegenerateSpell() {
+    public DispelMagicSpell() {
         super();
-        this.name = "Regenerate";
-        this.symbol = "DRUULDRRR";
-        this.level = 7;
+        this.name = "Dispel Magic";
+        this.symbol = "ULURLUR";
+        this.level = 3;
     }
 
     @Override
     public void cast(World world, LivingEntity user, ItemStack stack,
                      float durationModifier, float intensityModifier, float rangeModifier) {
         if (user.isSneaking()) {
-            user.heal(10.0f * intensityModifier);
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
+            user.clearStatusEffects();
+
         } else {
             try {
                 LivingEntity target = getEntityUnderCrosshair(user, world, (int) (5 * rangeModifier));
                 target.heal(10.0f * intensityModifier);
-                target.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
+                target.clearStatusEffects();
             } catch (NullPointerException e) {
                 user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
             }

@@ -151,24 +151,15 @@ public abstract class WandItem extends Item {
 
     private void populateSpellList() {
         allSpells.add(new ControlWeatherClearSpell());
-
         allSpells.add(new ControlWeatherRainSpell());
-
         allSpells.add(new ControlWeatherThunderSpell());
-
         allSpells.add(new ConjureBarrageSpell());
-
         allSpells.add(new ThunderwaveSpell());
-
         allSpells.add(new HealingWordSpell());
-
         allSpells.add(new RegenerateSpell());
-
         allSpells.add(new CallLightningSpell());
-
         allSpells.add(new InvisibilitySpell());
-
         allSpells.add(new MindSpikeSpell());
-
+        allSpells.add(new DispelMagicSpell());
     }
 }

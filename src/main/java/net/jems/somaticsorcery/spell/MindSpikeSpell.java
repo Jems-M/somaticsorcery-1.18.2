@@ -22,7 +22,7 @@ public class MindSpikeSpell extends Spell {
     public void cast(World world, LivingEntity user, ItemStack stack,
                      float durationModifier, float intensityModifier, float rangeModifier) {
         try {
-            LivingEntity target = getEntityUnderCrosshair(user, world, 30);
+            LivingEntity target = getEntityUnderCrosshair(user, world, (int) (30 * rangeModifier));
             target.damage(DamageSource.sting(user), 3);
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, (int) (1200 * durationModifier)));
         } catch (NullPointerException e) {
