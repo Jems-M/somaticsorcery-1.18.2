@@ -131,14 +131,20 @@ public abstract class WandItem extends Item {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        user.sendSystemMessage(new LiteralText("stopped using moment"), Util.NIL_UUID);
+        currentlyCasting = false;
         if (!world.isClient()) {
-            currentlyCasting = false;
+            user.sendSystemMessage(new LiteralText("not on client"), Util.NIL_UUID);
             for (Spell i : allSpells) {
+                user.sendSystemMessage(new LiteralText("in for loop"), Util.NIL_UUID);
                 if (currentSymbol.equals(i.getSymbol())) {
+                    user.sendSystemMessage(new LiteralText("symbol match"), Util.NIL_UUID);
                     if (i.getLevel() > this.maximumSpellLevel) {
                         user.sendSystemMessage(new LiteralText("My wand isn't powerful enough to cast this spell..."), Util.NIL_UUID);
                     } else {
+                        user.sendSystemMessage(new LiteralText("casting!"), Util.NIL_UUID);
                         i.cast();
+                        break;
                     }
                 }
             }
@@ -161,5 +167,6 @@ public abstract class WandItem extends Item {
         allSpells.add(new InvisibilitySpell());
         allSpells.add(new MindSpikeSpell());
         allSpells.add(new DispelMagicSpell());
+        allSpells.add(new ShadowBladeSpell());
     }
 }

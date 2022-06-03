@@ -4,6 +4,8 @@ import net.jems.somaticsorcery.effect.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.Util;
 import net.minecraft.world.World;
 
 public class CallLightningSpell extends Spell {
@@ -18,6 +20,8 @@ public class CallLightningSpell extends Spell {
     @Override
     public void cast(World world, LivingEntity user, ItemStack stack,
                      float durationModifier, float intensityModifier, float rangeModifier) {
-        user.addStatusEffect(new StatusEffectInstance(ModEffects.CALL_LIGHTNING, (int) (3600 * durationModifier)));
+        //user.addStatusEffect(new StatusEffectInstance(ModEffects.CALL_LIGHTNING, (int) (3600 * durationModifier)));
+        user.sendSystemMessage(new LiteralText("tricked you, this spell doesnt work, loser (sunglasses emoji)"), Util.NIL_UUID);
+
     }
 }
