@@ -5,6 +5,7 @@ public class IronWandItem extends WandItem {
         super(settings);
         this.durationModifier = 0.75f;
         this.intensityModifier = 0.75f;
+        this.rangeModifier = 1.0f;
         this.maximumSpellLevel = 2;
 
     }

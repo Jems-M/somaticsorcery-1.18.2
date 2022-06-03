@@ -5,6 +5,7 @@ public class WoodenWandItem extends WandItem {
         super(settings);
         this.durationModifier = 0.25f;
         this.intensityModifier = 0.25f;
+        this.rangeModifier = 0.5f;
         this.maximumSpellLevel = 0;
 
     }

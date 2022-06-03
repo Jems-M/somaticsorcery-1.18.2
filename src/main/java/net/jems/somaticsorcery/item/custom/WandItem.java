@@ -1,5 +1,6 @@
 package net.jems.somaticsorcery.item.custom;
 
+import net.jems.somaticsorcery.effect.ModEffects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -43,6 +44,7 @@ public abstract class WandItem extends Item {
 
     float durationModifier;
     float intensityModifier;
+    float rangeModifier;
     int maximumSpellLevel;
 
     private final String symbolControlWeatherClear = "UUURRDURRDD";
@@ -54,7 +56,7 @@ public abstract class WandItem extends Item {
     private final String symbolRegenerate = "DRUULDRRR";
     private final String symbolCallLightning = "UULRR";
     private final String symbolInvisibility = "LDRRU";
-    private final String symbolMindSpike = "LDDDD";
+    private final String symbolMindSpike = "LDDD";
 
 
     public WandItem(Settings settings) {
@@ -150,7 +152,7 @@ public abstract class WandItem extends Item {
                 case symbolControlWeatherClear:
                     try {
                         ServerWorld serverWorld = user.getServer().getOverworld();
-                        serverWorld.setWeather(36000, 0, false, false);
+                        serverWorld.setWeather((int) (36000 * durationModifier), 0, false, false);
                     } catch (NullPointerException e) {
                         //user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
                     }
@@ -159,7 +161,7 @@ public abstract class WandItem extends Item {
                 case symbolControlWeatherRain:
                     try {
                         ServerWorld serverWorld = user.getServer().getOverworld();
-                        serverWorld.setWeather(0, 36000, true, false);
+                        serverWorld.setWeather(0, (int) (36000 * durationModifier), true, false);
                     } catch (NullPointerException e) {
                         //user.sendSystemMessage(new LiteralText("hehe null pointer exception "), Util.NIL_UUID);
                     }
@@ -168,7 +170,7 @@ public abstract class WandItem extends Item {
                 case symbolControlWeatherThunder:
                     try {
                         ServerWorld serverWorld = user.getServer().getOverworld();
-                        serverWorld.setWeather(0, 36000, true, true);
+                        serverWorld.setWeather(0, (int) (36000 * durationModifier), true, true);
                     } catch (NullPointerException e) {
                         //user.sendSystemMessage(new LiteralText("hehe null pointer exception"), Util.NIL_UUID);
                     }
@@ -176,7 +178,7 @@ public abstract class WandItem extends Item {
 
                 case symbolConjureBarrage:
                     final int spread = 6;
-                    int numArrows = 8 + (int) Math.ceil(Math.random() * 4);
+                    int numArrows = 8 + (int) Math.ceil(Math.random() * (4 *  intensityModifier));
 
                     for (int i = 0; i < numArrows; i++) {
                         ArrowItem arrowItem = (ArrowItem) (stack.getItem() instanceof ArrowItem ? stack.getItem() : Items.ARROW);
@@ -191,22 +193,22 @@ public abstract class WandItem extends Item {
                         persistentProjectileEntity.setVelocity(user,
                                 user.getPitch() - spread + (float) ((Math.random() * 2 * spread)),
                                 user.getYaw() - (2 * spread) + (float) ((Math.random() * 4 * spread)),
-                                0, 5 * (float) (Math.random()), 1);
+                                0, (4 * (float) (Math.random())) + intensityModifier, 1);
                         world.spawnEntity(persistentProjectileEntity);
                     }
                     break;
 
                 case symbolThunderwave:
-                    world.createExplosion(user, user.getX(), user.getBodyY(0.0625), user.getZ(), 3.0f, Explosion.DestructionType.NONE);
+                    world.createExplosion(user, user.getX(), user.getBodyY(0.0625), user.getZ(), 3.0f + intensityModifier, Explosion.DestructionType.NONE);
                     break;
 
                 case symbolHealingWord:
                     if (user.isSneaking()) {
-                        user.heal(5.0f);
+                        user.heal(6.0f * intensityModifier);
                     } else {
                         try {
                             LivingEntity target = getEntityUnderCrosshair(user, world, 30);
-                            target.heal(5.0f);
+                            target.heal(6.0f * intensityModifier);
                         } catch (NullPointerException e) {
                             user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
                         }
@@ -215,13 +217,13 @@ public abstract class WandItem extends Item {
 
                 case symbolRegenerate:
                     if (user.isSneaking()) {
-                        user.heal(10.0f);
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6000));
+                        user.heal(10.0f * intensityModifier);
+                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
                     } else {
                         try {
                             LivingEntity target = getEntityUnderCrosshair(user, world, 5);
-                            target.heal(10.0f);
-                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6000));
+                            target.heal(10.0f * intensityModifier);
+                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
                         } catch (NullPointerException e) {
                             user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
                         }
@@ -229,16 +231,16 @@ public abstract class WandItem extends Item {
                     break;
 
                 case symbolCallLightning:
-
+                    user.addStatusEffect(new StatusEffectInstance(ModEffects.CALL_LIGHTNING, (int) (3600 * durationModifier)));
                     break;
 
                 case symbolInvisibility:
                     if (user.isSneaking()) {
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 3600));
+                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (3600 * durationModifier)));
                     } else {
                         try {
                             LivingEntity target = getEntityUnderCrosshair(user, world, 5);
-                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 3600));
+                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (3600 * durationModifier)));
                         } catch (NullPointerException e) {
                             user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
                         }
@@ -249,7 +251,7 @@ public abstract class WandItem extends Item {
                     try {
                         LivingEntity target = getEntityUnderCrosshair(user, world, 30);
                         target.damage(DamageSource.sting(user), 3);
-                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 3600));
+                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, (int) (3600 * durationModifier)));
                     } catch (NullPointerException e) {
                         user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
                     }

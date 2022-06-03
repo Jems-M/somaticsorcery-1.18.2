@@ -5,6 +5,7 @@ public class StoneWandItem extends WandItem {
         super(settings);
         this.durationModifier = 0.5f;
         this.intensityModifier = 0.5f;
+        this.rangeModifier = 0.75f;
         this.maximumSpellLevel = 1;
 
     }

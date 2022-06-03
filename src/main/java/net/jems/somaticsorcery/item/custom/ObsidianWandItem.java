@@ -5,6 +5,7 @@ public class ObsidianWandItem extends WandItem {
         super(settings);
         this.durationModifier = 1.25f;
         this.intensityModifier = 1.25f;
+        this.rangeModifier = 2.0f;
         this.maximumSpellLevel = 9;
 
     }
