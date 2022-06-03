@@ -23,7 +23,7 @@ public class MindSpikeSpell extends Spell {
                      float durationModifier, float intensityModifier, float rangeModifier) {
         try {
             LivingEntity target = getEntityUnderCrosshair(user, world, (int) (30 * rangeModifier));
-            target.damage(DamageSource.sting(user), 3);
+            target.damage(DamageSource.sting(user), 3 * intensityModifier);
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, (int) (1200 * durationModifier)));
         } catch (NullPointerException e) {
             user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
