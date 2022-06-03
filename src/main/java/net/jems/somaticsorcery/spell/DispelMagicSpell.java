@@ -25,7 +25,7 @@ public class DispelMagicSpell extends Spell {
 
         } else {
             try {
-                LivingEntity target = getEntityUnderCrosshair(user, world, (int) (5 * rangeModifier));
+                LivingEntity target = getEntityUnderCrosshair(user, world, (int) (30 * rangeModifier));
                 target.heal(10.0f * intensityModifier);
                 target.clearStatusEffects();
             } catch (NullPointerException e) {

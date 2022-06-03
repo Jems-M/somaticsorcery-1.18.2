@@ -25,7 +25,7 @@ public class RegenerateSpell extends Spell {
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
         } else {
             try {
-                LivingEntity target = getEntityUnderCrosshair(user, world, (int) (5 * rangeModifier));
+                LivingEntity target = getEntityUnderCrosshair(user, world, (int) (3 * rangeModifier));
                 target.heal(10.0f * intensityModifier);
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, (int) (6000 * durationModifier)));
             } catch (NullPointerException e) {
