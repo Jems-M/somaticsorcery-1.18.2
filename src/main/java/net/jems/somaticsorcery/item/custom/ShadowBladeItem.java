@@ -1,5 +1,6 @@
 package net.jems.somaticsorcery.item.custom;
 
+import net.jems.somaticsorcery.SomaticSorcery;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +17,9 @@ public class ShadowBladeItem extends SwordItem {
 
     private int tickSecondsTimer;
 
+    ItemStack stack;
+    LivingEntity attacker;
+
 
     public ShadowBladeItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
@@ -23,10 +27,19 @@ public class ShadowBladeItem extends SwordItem {
     }
 
     @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         tickSecondsTimer++;
-        if (tickSecondsTimer % 20 == 0) {
-            stack.damage(1, (LivingEntity) entity, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+        this.stack = stack;
+        if (entity instanceof LivingEntity) {
+            this.attacker = (LivingEntity) entity;
+        }
+        if (tickSecondsTimer % 3600 == 0) {
+            stack.decrement(1);
             tickSecondsTimer = 0;
         }
         super.inventoryTick(stack, world, entity, slot, selected);
@@ -36,7 +49,7 @@ public class ShadowBladeItem extends SwordItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         int lightLevel = attacker.world.getLightingProvider().getLight(attacker.getBlockPos(), attacker.world.getAmbientDarkness());
         int bonusDamage = (16 - lightLevel) / 2;
-        target.damage(DamageSource.GENERIC, bonusDamage);
-        return super.postHit(stack, target, attacker);
+        target.damage(DamageSource.GENERIC, getAttackDamage() + bonusDamage);
+        return true;
     }
 }

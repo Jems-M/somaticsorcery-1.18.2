@@ -37,22 +37,28 @@ public class ModItems {
             new ObsidianWandItem(new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxCount(1)));
 
     public static final Item WOODEN_SHADOW_BLADE = registerItem("shadow_blade_wooden",
-            new ShadowBladeItem(ToolMaterials.WOOD, 4, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.WOOD, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
     public static final Item STONE_SHADOW_BLADE = registerItem("shadow_blade_stone",
-            new ShadowBladeItem(ToolMaterials.STONE, 4, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.STONE, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
     public static final Item IRON_SHADOW_BLADE = registerItem("shadow_blade_iron",
-            new ShadowBladeItem(ToolMaterials.IRON, 4, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.IRON, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
     public static final Item GOLDEN_SHADOW_BLADE = registerItem("shadow_blade_golden",
-            new ShadowBladeItem(ToolMaterials.GOLD, 4, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.GOLD, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
     public static final Item DIAMOND_SHADOW_BLADE = registerItem("shadow_blade_diamond",
-            new ShadowBladeItem(ToolMaterials.DIAMOND, 4, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.DIAMOND, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
     public static final Item OBSIDIAN_SHADOW_BLADE = registerItem("shadow_blade_obsidian",
-            new ShadowBladeItem(ToolMaterials.DIAMOND, 7, 2f, new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
+            new ShadowBladeItem(ToolMaterials.DIAMOND, 7, 2f,
+                    new FabricItemSettings().group(ModItemGroup.SOMATIC_SORCERY).maxDamage(180)));
 
 
 

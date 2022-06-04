@@ -4,6 +4,8 @@ package net.jems.somaticsorcery.spell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -30,8 +32,8 @@ public abstract class Spell {
         return level;
     }
 
-    public void cast() {
-
+    public void cast(LivingEntity user) {
+        user.sendSystemMessage(new LiteralText("... a mistake has been made"), Util.NIL_UUID);
     }
 
     public abstract void cast(World world, LivingEntity user, ItemStack stack,
