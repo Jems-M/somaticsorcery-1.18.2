@@ -26,7 +26,7 @@ public class MindSpikeSpell extends Spell {
             target.damage(DamageSource.sting(user), 3 * intensityModifier);
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, (int) (1200 * durationModifier)));
         } catch (NullPointerException e) {
-            user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
+            user.sendSystemMessage(new LiteralText("No valid target (hold shift to target yourself!)"), Util.NIL_UUID);
         }
     }
 }

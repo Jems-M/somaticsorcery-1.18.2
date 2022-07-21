@@ -29,7 +29,7 @@ public class DispelMagicSpell extends Spell {
                 target.heal(10.0f * intensityModifier);
                 target.clearStatusEffects();
             } catch (NullPointerException e) {
-                user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
+                user.sendSystemMessage(new LiteralText("No valid target (hold shift to target yourself!)"), Util.NIL_UUID);
             }
         }
     }

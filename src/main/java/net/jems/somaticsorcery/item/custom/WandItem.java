@@ -76,13 +76,13 @@ public abstract class WandItem extends Item {
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        if (!currentlyCasting) {
-            startYaw = user.getYaw();
-            startPitch = user.getPitch();
-            currentSymbol = "";
-        }
-        currentlyCasting = true;
         if (!world.isClient()) {
+            if (!currentlyCasting) {
+                startYaw = user.getYaw();
+                startPitch = user.getPitch();
+                currentSymbol = "";
+            }
+            currentlyCasting = true;
             if (!correctSymbolDrawn) {
                 if (yawChanged || pitchChanged) {
                     startYaw = user.getYaw();
@@ -164,5 +164,6 @@ public abstract class WandItem extends Item {
         allSpells.add(new DispelMagicSpell());
         allSpells.add(new ShadowBladeSpell());
         allSpells.add(new FireballSpell());
+        allSpells.add(new FeatherFallSpell());
     }
 }

@@ -26,7 +26,7 @@ public class FireballProjectileEntity extends AbstractFireballEntity {
     }
 
     public void setVelocity(LivingEntity owner) {
-        setVelocity(owner, owner.getPitch(), owner.getYaw(), owner.getRoll(), 5, 0);
+        setVelocity(owner, owner.getPitch(), owner.getYaw(), owner.getRoll(), 4, 0);
     }
 
 

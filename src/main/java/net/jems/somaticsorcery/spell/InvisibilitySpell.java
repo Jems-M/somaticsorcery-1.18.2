@@ -27,7 +27,7 @@ public class InvisibilitySpell extends Spell {
                 LivingEntity target = getEntityUnderCrosshair(user, world, (int) (3 * rangeModifier));
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (3600 * durationModifier)));
             } catch (NullPointerException e) {
-                user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
+                user.sendSystemMessage(new LiteralText("No valid target (hold shift to target yourself!)"), Util.NIL_UUID);
             }
         }
     }

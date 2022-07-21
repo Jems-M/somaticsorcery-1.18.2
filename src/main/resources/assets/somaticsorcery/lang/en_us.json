@@ -19,5 +19,6 @@
 
   "itemGroup.somaticsorcery.somatic_sorcery": "Somatic Sorcery",
 
-  "effect.somaticsorcery.call_lightning": "Call Lightning"
+  "effect.somaticsorcery.call_lightning": "Call Lightning",
+  "effect.somaticsorcery.feather_fall": "Feather Fall"
 }

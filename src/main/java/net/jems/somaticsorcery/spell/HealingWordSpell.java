@@ -25,7 +25,7 @@ public class HealingWordSpell extends Spell {
                 LivingEntity target = getEntityUnderCrosshair(user, world, (int) (30 * rangeModifier));
                 target.heal(6.0f * intensityModifier);
             } catch (NullPointerException e) {
-                user.sendSystemMessage(new LiteralText("Spell failed"), Util.NIL_UUID);
+                user.sendSystemMessage(new LiteralText("No valid target (hold shift to target yourself!)"), Util.NIL_UUID);
             }
         }
     }
